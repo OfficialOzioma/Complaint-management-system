@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Complaint extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'title',
-        'resolved',
-        'description',
+        'complaint_id',
+        'comment',
     ];
 
     public function user()
@@ -21,13 +20,13 @@ class Complaint extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function complaint()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Complaint::class);
     }
 
-    public function activities()
+    public function activity()
     {
-        return $this->hasMany(Activity::class);
+        return $this->hasOne(Activity::class);
     }
 }
