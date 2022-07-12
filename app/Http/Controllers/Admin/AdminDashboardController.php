@@ -90,7 +90,7 @@ class AdminDashboardController extends Controller
 
         $complain = new Issue();
         $complain->title = $request->title;
-        $complain->categories_id = $request->category;
+        $complain->category_id = $request->category;
         $complain->issue = $request->issue;
 
         if ($complain->save()) {
@@ -112,14 +112,5 @@ class AdminDashboardController extends Controller
             return redirect()->route('admin.issuesList')->with('success', 'Issue deleted successfully');
         }
         return redirect()->route('admin.issuesList')->with('error', 'sorry, something went wrong');
-    }
-
-
-    public function categoriesList()
-    {
-    }
-
-    public function categoriesCreate()
-    {
     }
 }

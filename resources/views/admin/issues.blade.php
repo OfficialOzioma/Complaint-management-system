@@ -33,7 +33,7 @@
                                                 <hr />
                                                 {!! Str::limit($issue->issue, 100, '...') !!}
                                                 @if (strlen($issue->issue) > 100)
-                                                    <a href="">
+                                                    <a href="{{ route('admin.issues.show', $issue->id) }}">
                                                         <span
                                                             class="bg-green-100 text-green-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">
                                                             Read more
