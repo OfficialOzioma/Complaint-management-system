@@ -89,4 +89,4 @@
 </footer>
 
 <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
-@vite('resources/js/app.js')
+{{-- @vite('resources/js/app.js') --}}

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // condition 1: if the request is from the localhost, then we will use the localhost url
+        if (env('APP_ENV') === 'production') {
+            $this->app['request']->server->set('HTTPS', 'on'); // this line
+
+            URL::forceSchema('https');
+        }
+
+        // condition 2: if the request is from the localhost, then we will use the localhost url
+        if (env('APP_FORCE_HTTPS', false)) {
+            URL::forceScheme('https');
+        }
     }
 }
