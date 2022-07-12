@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Complaint;
 
 use App\Models\Activity;
+use App\Models\Category;
 use App\Models\Complaint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Issue;
 
 class ComplaintController extends Controller
 {
@@ -31,11 +33,14 @@ class ComplaintController extends Controller
             $complains = Complaint::where('user_id', auth()->user()->id)
                 ->with('comments')
                 ->get();
+            $issues = Issue::get();
+            return view('complaint.index', compact('complains', 'issues'));
         } else {
             $complains = Complaint::with('comments')->get();
-        }
+            $issues = Issue::get();
 
-        return view('complaint.index', compact('complains'));
+            return view('complaint.index', compact('complains', 'issues'));
+        }
     }
 
     /**
@@ -45,7 +50,8 @@ class ComplaintController extends Controller
      */
     public function create()
     {
-        return view('complaint.create');
+        $categories = Category::get();
+        return view('complaint.create', compact('categories'));
     }
 
     /**
@@ -58,11 +64,13 @@ class ComplaintController extends Controller
     {
         $request->validate([
             'title' => 'required',
+            'category' => 'required',
             'description' => 'required',
         ]);
 
         $complaint = Complaint::create([
             'title' => $request->title,
+            'categories_id' => $request->category,
             'description' => $request->description,
             'user_id' => auth()->user()->id,
             'resolved' => false,
@@ -92,7 +100,7 @@ class ComplaintController extends Controller
      */
     public function show($id)
     {
-        $complain = Complaint::where('id', $id)->with(['user', 'comments'])->first();
+        $complain = Complaint::where('id', $id)->with(['user', 'comments', 'category'])->first();
         // dd($complain);
         return view('complaint.show', compact('complain'));
     }
@@ -145,6 +153,34 @@ class ComplaintController extends Controller
         $complaint->save();
 
         return redirect()->route('dashboard')->with(['success' => 'Sucessfully, Complaint resolved.']);
+    }
+
+    /**
+     * Get complaint as resolved.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function getresolved(Request $request)
+    {
+        $complains = Complaint::where('resolved', true)->get();
+
+        return view('complaint.index', compact('complains'));
+    }
+
+    /**
+     * Get complaint as resolved.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function getunresolved(Request $request)
+    {
+        $complains = Complaint::where('resolved', false)->get();
+
+        return view('complaint.index', compact('complains'));
     }
 
     /**

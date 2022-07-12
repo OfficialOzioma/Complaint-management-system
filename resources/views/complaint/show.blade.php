@@ -7,10 +7,10 @@
     <header class="w-full container mx-auto">
         <div class="flex flex-col items-center py-12">
             <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
-                Complaint Page
+                Complain Page
             </a>
             <p class="text-lg text-gray-600">
-                Lorem Ipsum Dolor Sit Amet
+                This was created by {{ $complain->user->name }}
             </p>
         </div>
     </header>
@@ -24,7 +24,9 @@
                 <article class="flex flex-col shadow my-4">
 
                     <div class="bg-white flex flex-col justify-start p-6">
-                        <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">School fees</a>
+                        <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">
+                            {{ $complain->category->name }}
+                        </a>
                         <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">
                             {{ $complain->title }}
                         </a>
@@ -40,38 +42,47 @@
                         </p>
                     </div>
                 </article>
-                @if (auth()->check())
-                    @if ($complain->user_id == Auth::user()->id)
-                        <div class="flex flex-col items-center justify-center m-2">
-                            <div class="inline-flex rounded-md shadow-sm" role="group">
-                                <button type="button"
-                                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-l-lg border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                                    <span class="p-1">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </span>
-                                    <a href="{{ route('complaint.edit', $complain->id) }}">Edit</a>
-                                </button>
-                                <button type="button" data-modal-toggle="edit-modal"
-                                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-green-900 hover:bg-green-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-green-500 focus:bg-green-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-green-700 dark:focus:bg-green-700">
-                                    <span class="p-1">
-                                        <i class="fa-solid fa-square-check"></i>
-                                    </span>
-                                    <span>Mark as resolved </span>
-                                </button>
-                                <form action="#" method="POST">
-
-                                    <button type="button" type="submit" data-modal-toggle="delete-modal"
-                                        class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-red-900 hover:bg-red-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700">
+                @if ($complain->resolved == false)
+                    @if (auth()->check())
+                        @if ($complain->user_id == Auth::user()->id)
+                            <div class="flex flex-col items-center justify-center m-2">
+                                <div class="inline-flex rounded-md shadow-sm" role="group">
+                                    <button type="button"
+                                        class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-l-lg border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                                         <span class="p-1">
-                                            <i class="fa-solid fa-trash-can"></i>
+                                            <i class="fa-solid fa-pen-to-square"></i>
                                         </span>
-                                        Delete
+                                        <a href="{{ route('complaint.edit', $complain->id) }}">Edit</a>
                                     </button>
-                                </form>
+                                    <button type="button" data-modal-toggle="edit-modal"
+                                        class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-green-900 hover:bg-green-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-green-500 focus:bg-green-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-green-700 dark:focus:bg-green-700">
+                                        <span class="p-1">
+                                            <i class="fa-solid fa-square-check"></i>
+                                        </span>
+                                        <span>Mark as resolved </span>
+                                    </button>
+                                    <form action="#" method="POST">
 
+                                        <button type="button" type="submit" data-modal-toggle="delete-modal"
+                                            class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-red-900 hover:bg-red-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700">
+                                            <span class="p-1">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </span>
+                                            Delete
+                                        </button>
+                                    </form>
+
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endif
+                @else
+                    <h1>
+                        <span
+                            class="bg-green-300 text-white-800 text-4xl font-medium m-4 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">
+                            This complain has been resolved.
+                        </span>
+                    </h1>
                 @endif
 
 

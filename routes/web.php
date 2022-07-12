@@ -33,6 +33,8 @@ Route::get('/register', [UserAuthController::class, 'register'])->name('register
 Route::post('/signup', [UserAuthController::class, 'signup'])->name('signup');
 
 Route::get('/complaint', [ComplaintController::class, 'index'])->name('complaint.index');
+Route::get('/complaint/resolved', [ComplaintController::class, 'getresolved'])->name('complaint.resolved');
+Route::get('/complaint/unresolved', [ComplaintController::class, 'getunresolved'])->name('complaint.unresolved');
 Route::get('/complaint/show/{id}', [ComplaintController::class, 'show'])->name('complaint.show');
 
 /*------------------------------------------
@@ -71,6 +73,8 @@ All Admin Routes List
 
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 Route::post('/admin/authenticate', [AdminAuthController::class, 'adminAuthenticate'])->name('admin.authenticate');
+Route::get('admin/issues/{id}', [AdminDashboardController::class, 'issuesShow'])->name('admin.issues.show');
+
 
 Route::middleware('auth:admin')->group(function () {
     // Route::middleware(['auth', 'user-access:admin'])->group(function () {

@@ -11,6 +11,7 @@ class Complaint extends Model
 
     protected $fillable = [
         'user_id',
+        'categories_id',
         'title',
         'resolved',
         'description',
@@ -23,7 +24,7 @@ class Complaint extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'categories_id');
     }
 
     public function comments()

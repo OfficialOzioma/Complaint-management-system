@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Admin;
+use App\Models\Issue;
+use App\Models\Category;
+use App\Models\Complaint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Complaint;
-use App\Models\Issue;
-use App\Models\User;
 
 class AdminDashboardController extends Controller
 {
@@ -19,7 +20,7 @@ class AdminDashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        // $this->middleware('auth:admin');
         $this->complains = Complaint::get();
     }
 
@@ -74,8 +75,10 @@ class AdminDashboardController extends Controller
     public function issuesList()
     {
         $complains = $this->complains;
+        $categories = Category::get();
         $issues = Issue::get();
-        return view('admin.issues', compact('complains', 'issues'));
+
+        return view('admin.issues', compact('complains', 'issues', 'categories'));
     }
 
     public function issuesCreate(Request $request)
@@ -87,12 +90,19 @@ class AdminDashboardController extends Controller
 
         $complain = new Issue();
         $complain->title = $request->title;
+        $complain->categories_id = $request->category;
         $complain->issue = $request->issue;
 
         if ($complain->save()) {
             return redirect()->route('admin.issuesList')->with('success', 'Issue created successfully');
         }
         return redirect()->route('admin.issuesList')->with('error', 'sorry, something went wrong');
+    }
+
+    public function issuesShow($id)
+    {
+        $issue = Issue::where('id', $id)->with('category')->first();
+        return view('admin.showIssue', compact('issue'));
     }
 
     public function deleteIssue($id)

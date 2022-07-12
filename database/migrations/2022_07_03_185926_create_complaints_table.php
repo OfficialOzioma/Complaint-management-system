@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('categories_id');
             $table->string('title');
             $table->text('description');
             $table->boolean('resolved')->default(false);

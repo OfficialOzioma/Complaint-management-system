@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest:admin')->except('logout');
-    }
+
 
     public function login()
     {

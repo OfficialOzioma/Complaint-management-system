@@ -67,6 +67,7 @@
         <a href="#" class="font-semibold flex justify-center items-center mb-8 lg:mb-1">
             <img src="https://res.cloudinary.com/ozilo4r/image/upload/v1656807843/admin.jpg" class="h-15 mr-4" alt="CMS Logo">
         </a>
+
         <!-- Card -->
         <div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0">
             <div class="p-6 sm:p-8 lg:p-16 space-y-8">
@@ -89,14 +90,14 @@
                             required>
                     </div>
                     <div class="flex items-start">
-                        <div class="flex items-center h-5">
+                        {{-- <div class="flex items-center h-5">
                             <input id="remember" aria-describedby="remember" name="remember" type="checkbox"
-                                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded"
-                                required>
-                        </div>
-                        <div class="text-sm ml-3">
+                                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded">
+                        </div> --}}
+                        {{-- <div class="text-sm ml-3">
                             <label for="remember" class="font-medium text-gray-900">Remember me</label>
-                        </div>
+                        </div> --}}
+
                         <a href="#" class="text-sm text-teal-500 hover:underline ml-auto">Lost Password?</a>
                     </div>
                     <button type="submit"

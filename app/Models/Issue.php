@@ -11,6 +11,12 @@ class Issue extends Model
 
     protected $fillable = [
         'title',
+        'category_id',
         'issue',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

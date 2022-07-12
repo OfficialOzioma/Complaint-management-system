@@ -11,6 +11,8 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="{{ asset('build/assets/app.e9604efa.css') }}" />
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
 
@@ -48,6 +50,8 @@
 
     @vite('resources/js/app.js')
 
+
+    <script src="{{ asset('build/assets/app.b0047f3e.js') }}"></script>
 </body>
 
 </html>
