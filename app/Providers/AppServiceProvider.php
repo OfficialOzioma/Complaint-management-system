@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\URL;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,18 +22,22 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(UrlGenerator $url)
     {
         // condition 1: if the request is from the localhost, then we will use the localhost url
-        if (env('APP_ENV') === 'production') {
-            $this->app['request']->server->set('HTTPS', 'on'); // this line
+        // if (env('APP_ENV') === 'production') {
+        //     $this->app['request']->server->set('HTTPS', 'on'); // this line
 
-            URL::forceSchema('https');
-        }
+        //     URL::forceSchema('https');
+        // }
 
-        // condition 2: if the request is from the localhost, then we will use the localhost url
-        if (env('APP_FORCE_HTTPS', false)) {
-            URL::forceScheme('https');
+        // // condition 2: if the request is from the localhost, then we will use the localhost url
+        // if (env('APP_FORCE_HTTPS', false)) {
+        //     URL::forceScheme('https');
+        // }
+
+        if (env('APP_ENV') !== 'local') {
+            $url->forceScheme('https');
         }
     }
 }
