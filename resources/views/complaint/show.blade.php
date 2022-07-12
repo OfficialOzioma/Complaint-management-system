@@ -40,41 +40,40 @@
                         </p>
                     </div>
                 </article>
-
-                @if ($complain->user_id == Auth::user()->id)
-                    <div class="flex flex-col items-center justify-center m-2">
-                        <div class="inline-flex rounded-md shadow-sm" role="group">
-                            <button type="button"
-                                class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-l-lg border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
-                                <span class="p-1">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </span>
-                                <a href="{{ route('complaint.edit', $complain->id) }}">Edit</a>
-                            </button>
-                            <button type="button" data-modal-toggle="edit-modal"
-                                class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-green-900 hover:bg-green-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-green-500 focus:bg-green-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-green-700 dark:focus:bg-green-700">
-                                <span class="p-1">
-                                    <i class="fa-solid fa-square-check"></i>
-                                </span>
-                                <span>Mark as resolved </span>
-                            </button>
-                            <form action="#" method="POST">
-
-                                <button type="button" type="submit" data-modal-toggle="delete-modal"
-                                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-red-900 hover:bg-red-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700">
+                @if (auth()->check())
+                    @if ($complain->user_id == Auth::user()->id)
+                        <div class="flex flex-col items-center justify-center m-2">
+                            <div class="inline-flex rounded-md shadow-sm" role="group">
+                                <button type="button"
+                                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-l-lg border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                                     <span class="p-1">
-                                        <i class="fa-solid fa-trash-can"></i>
+                                        <i class="fa-solid fa-pen-to-square"></i>
                                     </span>
-                                    Delete
+                                    <a href="{{ route('complaint.edit', $complain->id) }}">Edit</a>
                                 </button>
-                            </form>
+                                <button type="button" data-modal-toggle="edit-modal"
+                                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-green-900 hover:bg-green-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-green-500 focus:bg-green-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-green-700 dark:focus:bg-green-700">
+                                    <span class="p-1">
+                                        <i class="fa-solid fa-square-check"></i>
+                                    </span>
+                                    <span>Mark as resolved </span>
+                                </button>
+                                <form action="#" method="POST">
 
+                                    <button type="button" type="submit" data-modal-toggle="delete-modal"
+                                        class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-red-900 hover:bg-red-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700">
+                                        <span class="p-1">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </span>
+                                        Delete
+                                    </button>
+                                </form>
+
+                            </div>
                         </div>
-                    </div>
-                    {{-- @include('modal.modal', [
-                    'complain_id' => $complain->id,
-                ]) --}}
+                    @endif
                 @endif
+
 
 
                 <div class="w-full shadow bg-white ">
@@ -104,76 +103,80 @@
                                 </form>
                             </div> <br />
                         @else
-                            <div class="w-full ">
-                                <p class="text-sm">
+                            <div class="w-full p-5">
+                                <p class="text-lg text-center">
                                     Please <a href="{{ route('login') }}"
-                                        class="font-semibold hover:text-gray-800">login</a>
+                                        class="font-semibold hover:text-gray-800 text-blue-700">Login</a>
                                     to add a comment.
                             </div>
                         @endif
 
-                        @if ($complain->comments->count() > 0)
-                            @foreach ($complain->comments as $comment)
-                                <div class="rounded-xl border p-5 mb-5  bg-white">
-                                    <div class="flex w-full items-center justify-between border-b pb-3">
-                                        <div class="flex items-center space-x-3">
-                                            <div
-                                                class="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]">
-                                            </div>
-                                            <div class="text-lg font-bold text-slate-700">{{ $comment->user->name }}</div>
-                                            <span class="text-sm text-gray-600">
-                                                <span
-                                                    class="bg-green-100 text-green-800 text-lg font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">
-                                                    @if ($complain->user->id == Auth::user()->id)
-                                                        Owner
-                                                    @else
-                                                        {{ $comment->user_type }}
-                                                    @endif
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <div class="flex items-center space-x-8">
-
-                                            <div class="text-xs text-neutral-800">
-                                                {{ $comment->created_at->diffForHumans() }}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-4 mb-6">
-                                        <div class="text-sm text-neutral-600">{{ $comment->body }}</div>
-                                    </div>
-
-                                    @if ($comment->user->id == Auth::user()->id)
-                                        <div class="flex justify-end">
-                                            <div class="flex items-center space-x-2">
-
-                                                <button type="button" type="button"
-                                                    data-modal-toggle="deleteComment-modal"
-                                                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-red-900 hover:bg-red-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700">
-                                                    <span class="p-1">
-                                                        <i class="fa-solid fa-trash-can"></i>
+                        @if (auth('user')->check())
+                            @if ($complain->comments->count() > 0)
+                                @foreach ($complain->comments as $comment)
+                                    <div class="rounded-xl border p-5 mb-5  bg-white">
+                                        <div class="flex w-full items-center justify-between border-b pb-3">
+                                            <div class="flex items-center space-x-3">
+                                                <div
+                                                    class="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]">
+                                                </div>
+                                                <div class="text-lg font-bold text-slate-700">{{ $comment->user->name }}
+                                                </div>
+                                                <span class="text-sm text-gray-600">
+                                                    <span
+                                                        class="bg-green-100 text-green-800 text-lg font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">
+                                                        @if ($complain->user->id == Auth::user()->id)
+                                                            Owner
+                                                        @else
+                                                            {{ $comment->user_type }}
+                                                        @endif
                                                     </span>
-                                                    Delete
-                                                </button>
+                                                </span>
+                                            </div>
+                                            <div class="flex items-center space-x-8">
+
+                                                <div class="text-xs text-neutral-800">
+                                                    {{ $comment->created_at->diffForHumans() }}
+                                                </div>
                                             </div>
                                         </div>
-                                    @endif
-                                    <div>
 
+                                        <div class="mt-4 mb-6">
+                                            <div class="text-sm text-neutral-600">{{ $comment->body }}</div>
+                                        </div>
+
+                                        @if ($comment->user->id == Auth::user()->id)
+                                            <div class="flex justify-end">
+                                                <div class="flex items-center space-x-2">
+
+                                                    <button type="button" type="button"
+                                                        data-modal-toggle="deleteComment-modal"
+                                                        class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-red-900 hover:bg-red-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700">
+                                                        <span class="p-1">
+                                                            <i class="fa-solid fa-trash-can"></i>
+                                                        </span>
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div>
+
+                                        </div>
                                     </div>
+                                    @php
+                                        $comment_id = $comment->id;
+                                    @endphp
+                                @endforeach
+                            @else
+                                <div class="w-full p-4 text-center">
+                                    <p class="text-md">
+                                        No comments yet.
+                                    </p>
                                 </div>
-                                @php
-                                    $comment_id = $comment->id;
-                                @endphp
-                            @endforeach
-                        @else
-                            <div class="w-full p-4 text-center">
-                                <p class="text-md">
-                                    No comments yet.
-                                </p>
-                            </div>
+                            @endif
                         @endif
+
                     </div>
 
                 </div>

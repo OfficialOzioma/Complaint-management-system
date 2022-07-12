@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Homecontroller;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserAuthController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Complaint\CommentController;
 use App\Http\Controllers\Complaint\ComplaintController;
@@ -74,5 +75,20 @@ Route::post('/admin/authenticate', [AdminAuthController::class, 'adminAuthentica
 Route::middleware('auth:admin')->group(function () {
     // Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
-    Route::get('/admin/home', [AdminDashboardController::class, 'adminHome'])->name('admin.home');
+    Route::get('/admin/home', [AdminDashboardController::class, 'index'])->name('admin.home');
+
+    Route::get('/admins', [AdminDashboardController::class, 'adminList'])->name('admin.adminList');
+    Route::post('admin/create', [AdminDashboardController::class, 'adminCreate'])->name('admin.adminCreate');
+    Route::delete('admin/delete', [AdminDashboardController::class, 'adminDelete'])->name('admin.adminDelete');
+
+    Route::get('admin/issues', [AdminDashboardController::class, 'issuesList'])->name('admin.issuesList');
+    Route::post('admin/issues/create', [AdminDashboardController::class, 'issuesCreate'])->name('admin.issuesCreate');
+    Route::put('admin/issues/create', [AdminDashboardController::class, 'issuesCreate'])->name('admin.issuesCreate');
+    Route::delete('admin/issues/create/{id}', [AdminDashboardController::class, 'deleteIssue'])->name('admin.deleteIssue');
+
+
+
+    Route::resource('admin/category', CategoryController::class);
+
+    Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 });

@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest:admin')->except('logout');
+    }
+
     public function login()
     {
         return view('admin.login');
@@ -20,7 +26,7 @@ class AdminAuthController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        if (auth('admin')->attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->route('admin.home');
         }
         return redirect()->back()->withErrors(['These credentials do not match our records.']);

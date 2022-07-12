@@ -63,7 +63,7 @@
         </div>
     </body> --}}
 
-    <div class="mx-auto md:h-screen flex flex-col justify-center items-center px-6 pt-8 pt:mt-0">
+    <div class="mx-auto md:h-screen flex flex-col justify-center items-center px-6 pt-8 pt:mt-0 mb-3">
         <a href="#" class="font-semibold flex justify-center items-center mb-8 lg:mb-1">
             <img src="https://res.cloudinary.com/ozilo4r/image/upload/v1656807843/admin.jpg" class="h-15 mr-4" alt="CMS Logo">
         </a>
@@ -73,7 +73,9 @@
                 <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">
                     Login
                 </h2>
-                <form class="mt-8 space-y-6" action="#">
+                @include('messages.flash-message')
+                <form class="mt-8 space-y-6" action="{{ route('admin.authenticate') }}" method="post">
+                    {{ csrf_field() }}
                     <div>
                         <label for="email" class="text-sm font-medium text-gray-900 block mb-2">Your email</label>
                         <input type="email" name="email" id="email"

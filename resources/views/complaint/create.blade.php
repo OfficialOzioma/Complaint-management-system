@@ -25,9 +25,9 @@
                         <label for="complaint" class="block mb-2 font-bold text-gray-600">Complain</label>
                         <textarea name="description" id="complaint" class="border border-gray-300 shadow p-3 w-full rounded mb-"
                             placeholder="What is your complain?" rows="3"></textarea>
-                        @if ($errors->has('complain'))
+                        @if ($errors->has('description'))
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Error!</span>
-                                {{ $errors->first('complain') }}
+                                {{ $errors->first('description') }}
                             </p>
                         @endif
                     </div>

@@ -231,8 +231,8 @@
                     <div class="w-96 h-auto rounded-lg flex-shrink-0 flex-grow bg-green-600 mb-24">
                         <span class="text-center text-3xl m-1 font-bold text-white dark:text-white">
                             <h3>
-                                <i class="fa-solid fas fa-clipboard-check text-1xl ml-32  text-white"></i>
-                                resolved Complains
+                                <i class="fa-solid  fa-clipboard-check text-1xl ml-32  text-white"></i>
+                                Resolved Complains
                             </h3>
                         </span>
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
