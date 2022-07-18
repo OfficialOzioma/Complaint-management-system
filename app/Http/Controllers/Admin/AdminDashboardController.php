@@ -8,7 +8,11 @@ use App\Models\Issue;
 use App\Models\Category;
 use App\Models\Complaint;
 use Illuminate\Http\Request;
+use App\Mail\NotificationMail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Notifications\EmailNotification;
+use Illuminate\Support\Facades\Notification;
 
 class AdminDashboardController extends Controller
 {
@@ -103,6 +107,48 @@ class AdminDashboardController extends Controller
     {
         $issue = Issue::where('id', $id)->with('category')->first();
         return view('admin.showIssue', compact('issue'));
+    }
+
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function sendEmail()
+    {
+        $mailData = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp.'
+        ];
+
+        Mail::to('your_email@gmail.com')->send(new NotificationMail($mailData));
+
+
+        if (Mail::failures()) {
+            return response()->Fail('Sorry! Please try again latter');
+        } else {
+            return response()->success('Great! Successfully send in your mail');
+        }
+
+        dd("Email is sent successfully.");
+    }
+
+    public function SendNotification()
+    {
+        $user = User::first();
+
+        $NotificationData = [
+            'greeting' => 'Hi ' . $user->name . ',',
+            'body' => 'This is the project assigned to you.',
+            'thanks' => 'Thank you this is from codeanddeploy.com',
+            'actionText' => 'View Project',
+            'actionURL' => url('/'),
+            'id' => 57
+        ];
+
+        Notification::send($user, new EmailNotification($NotificationData));
+        // $user->notify(new EmailNotification($NotificationData));
+        dd('Notification sent!');
     }
 
     public function deleteIssue($id)

@@ -29,18 +29,11 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        if (auth()->check()) {
-            $complains = Complaint::where('user_id', auth()->user()->id)
-                ->with('comments')
-                ->get();
-            $issues = Issue::get();
-            return view('complaint.index', compact('complains', 'issues'));
-        } else {
-            $complains = Complaint::with('comments')->get();
-            $issues = Issue::get();
 
-            return view('complaint.index', compact('complains', 'issues'));
-        }
+        $complains = Complaint::with('comments')->get();
+        $issues = Issue::get();
+
+        return view('complaint.index', compact('complains', 'issues'));
     }
 
     /**

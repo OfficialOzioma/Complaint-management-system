@@ -136,7 +136,7 @@
                                                 <span class="text-sm text-gray-600">
                                                     <span
                                                         class="bg-green-100 text-green-800 text-lg font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">
-                                                        @if ($complain->user->id == Auth::user()->id)
+                                                        @if ($complain->user->id === $comment->user_id)
                                                             Owner
                                                         @else
                                                             {{ $comment->user_type }}
