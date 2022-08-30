@@ -19,7 +19,7 @@
         </form>
     </div>
     @include('messages.flash-message')
-    @if (isset($issues) && $issues->count() > 0)
+    @if (isset($issues) && count($issues) > 0)
         <div class="p-10 m-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
             <!--Card 1-->
             @foreach ($issues as $issue)
@@ -27,7 +27,7 @@
 
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">{{ $issue->title }}</div>
-                        <p class="text-gray-700 text-base">
+                        <span class="text-gray-700 text-base">
                             <hr />
                             {!! Str::limit($issue->issue, 150, '...') !!}
                             @if (strlen($issue->issue) > 150)
@@ -38,8 +38,10 @@
                                     </span>
                                 </a>
                             @endif
-
+                        </span>
                     </div>
+
+
 
                 </div>
             @endforeach
@@ -56,7 +58,7 @@
 
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">{{ $complain->title }}</div>
-                        <p class="text-gray-700 text-base">
+                        <span class="text-gray-700 text-base">
                             <hr />
                             {!! Str::limit($complain->description, 100, '...') !!}
                             @if (strlen($complain->description) > 100)
@@ -67,7 +69,11 @@
                                     </span>
                                 </a>
                             @endif
-                        </p>
+                        </span>
+                        <br />
+                        <button  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            <a href="{{ route('complaint.show', $complain->id) }}">Open complain</a>
+                        </button>
                     </div>
 
                 </div>
