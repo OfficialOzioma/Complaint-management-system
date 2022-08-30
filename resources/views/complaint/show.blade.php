@@ -30,7 +30,7 @@
                         <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">
                             {{ $complain->title }}
                         </a>
-                        <p href="#" class="text-sm pb-8">
+                        <p class="text-sm pb-8">
                             By <a href="#"
                                 class="font-semibold hover:text-gray-800">{{ $complain->user->name }}</a>,
                             Published on
@@ -44,7 +44,7 @@
                 </article>
                 @if ($complain->resolved == false)
                     @if (auth()->check())
-                        @if ($complain->user_id == Auth::user()->id)
+                        @if ($complain->user_id == Auth::user('user')->id)
                             <div class="flex flex-col items-center justify-center m-2">
                                 <div class="inline-flex rounded-md shadow-sm" role="group">
                                     <button type="button"
@@ -63,7 +63,7 @@
                                     </button>
                                     <form action="#" method="POST">
 
-                                        <button type="button" type="submit" data-modal-toggle="delete-modal"
+                                        <button type="button" data-modal-toggle="delete-modal"
                                             class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-red-900 hover:bg-red-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700">
                                             <span class="p-1">
                                                 <i class="fa-solid fa-trash-can"></i>
@@ -160,7 +160,7 @@
                                             <div class="flex justify-end">
                                                 <div class="flex items-center space-x-2">
 
-                                                    <button type="button" type="button"
+                                                    <button type="button"
                                                         data-modal-toggle="deleteComment-modal"
                                                         class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-r-md border border-red-900 hover:bg-red-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700">
                                                         <span class="p-1">
