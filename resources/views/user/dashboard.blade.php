@@ -23,10 +23,10 @@
             </a>
 
             <!-- Profile -->
-            <div
-                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
-                <span><i class="fa-solid fa-user-large text-3xl"></i></span>
-            </div>
+{{--            <div--}}
+{{--                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">--}}
+{{--                <span><i class="fa-solid fa-user-large text-3xl"></i></span>--}}
+{{--            </div>--}}
 
             <!-- Complains -->
             <a href="{{ route('complaint.index') }}">
@@ -36,10 +36,12 @@
                 </div>
             </a>
             <!-- settings -->
-            <div
-                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
-                <span><i class="fa-solid fa-gear text-3xl"></i></span>
-            </div>
+            <a href="{{ route('user.setting') }}">
+                <div
+                    class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
+                    <span><i class="fa-solid fa-gear text-3xl"></i></span>
+                </div>
+            </a>
 
             <!-- logout -->
             <a href="{{ route('logout') }}">

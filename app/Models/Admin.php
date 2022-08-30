@@ -17,6 +17,8 @@ class Admin extends Model implements AuthenticatableContract
         'password',
     ];
 
+    protected $guard = 'admin';
+
     public function complaints()
     {
         return $this->hasMany(Complaint::class);

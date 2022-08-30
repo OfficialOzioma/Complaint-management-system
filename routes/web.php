@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Homecontroller;
 use App\Http\Controllers\User\UserController;
@@ -37,6 +38,8 @@ Route::get('/complaint/resolved', [ComplaintController::class, 'getresolved'])->
 Route::get('/complaint/unresolved', [ComplaintController::class, 'getunresolved'])->name('complaint.unresolved');
 Route::get('/complaint/show/{id}', [ComplaintController::class, 'show'])->name('complaint.show');
 
+Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
+
 /*------------------------------------------
 --------------------------------------------
 All Normal Users Routes List
@@ -55,8 +58,11 @@ Route::middleware('auth:user')->group(function () {
     Route::delete('/complaint/destroy', [ComplaintController::class, 'destroy'])->name('complaint.destroy');
     Route::post('/complaint/resolve', [ComplaintController::class, 'resolve'])->name('complaint.resolve');
 
-    Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
     Route::delete('/comment/destroy', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+    Route::get('/setting', [SettingController::class, 'settings'])->name('user.setting');
+    Route::post('/setting', [SettingController::class, 'store'])->name('save.setting');
+
 
     Route::get('/logout', [UserAuthController::class, 'logout'])->name('logout');
 });

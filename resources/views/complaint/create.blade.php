@@ -5,8 +5,10 @@
 
     <div class="bg-blue-50 min-h-screen flex items-center">
         <div class="w-full">
+            @if($setting)
             <h2 class="text-center text-green-600 font-bold text-2xl uppercase mb-10">Fill out Complaint form</h2>
             <div class="bg-white p-10 rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2">
+
                 @include('messages.flash-message')
                 <form action="{{ route('complaint.store') }}" method="post">
                     {{ csrf_field() }}
@@ -55,6 +57,11 @@
                         class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">Submit</button>
                 </form>
             </div>
+            @else
+                <h2 class="text-center text-green-600 text-xl uppercase mb-10">
+                    Fill out your <a href="{{ route('user.setting') }}" class="font-semibold text-gray-900 underline dark:text-white decoration-blue-500" >settings</a> before you can make a complain
+                </h2>
+            @endif
         </div>
     </div>
 

@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Complaint;
 use App\Models\Activity;
 use App\Models\Category;
 use App\Models\Complaint;
+use App\Models\Setting;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Issue;
+use Illuminate\Support\Str;
 
 class ComplaintController extends Controller
 {
@@ -19,19 +24,24 @@ class ComplaintController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('auth:user,admin');
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
+        if(auth()->check()){
+            $complains = Complaint::where('user_id', auth()->user()->id)->with('comments')->get();
+            $issues = Issue::get();
+        }else{
+            $complains = Complaint::with('comments')->get();
+            $issues = Issue::get();
+        }
 
-        $complains = Complaint::with('comments')->get();
-        $issues = Issue::get();
 
         return view('complaint.index', compact('complains', 'issues'));
     }
@@ -43,8 +53,10 @@ class ComplaintController extends Controller
      */
     public function create()
     {
+        $setting = Setting::where('user_id', auth()->user()->id)->first();
+
         $categories = Category::get();
-        return view('complaint.create', compact('categories'));
+        return view('complaint.create', compact('categories', 'setting'));
     }
 
     /**
@@ -66,6 +78,7 @@ class ComplaintController extends Controller
             'categories_id' => $request->category,
             'description' => $request->description,
             'user_id' => auth()->user()->id,
+            'unique_id' => Str::random(6),
             'resolved' => false,
         ]);
 

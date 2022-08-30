@@ -20,10 +20,15 @@
                                         <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
                                             {{ $complains->count() }}
                                         </span>
-                                        <h3 class="text-base font-normal text-gray-500">All complains </h3>
+                                        <h3 class="text-base font-normal text-gray-500">
+                                        <span  > All complains </span>
+                                        </h3>
                                     </div>
 
                                 </div>
+                                <span class="float-right">
+                                     <a href="{{ route('complaint.index') }}" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" > view </a>
+                                </span>
                             </div>
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                                 <div class="flex items-center">
@@ -35,6 +40,9 @@
                                     </div>
 
                                 </div>
+                                <span class="float-right">
+                                     <a href="{{ route('complaint.resolved') }}" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" > view </a>
+                                </span>
                             </div>
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                                 <div class="flex items-center">
@@ -46,17 +54,20 @@
                                     </div>
 
                                 </div>
+                                <span class="float-right">
+                                     <a href="{{ route('complaint.unresolved') }}" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" > view </a>
+                                </span>
                             </div>
-                            <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                                            {{ $users }}
-                                        </span>
-                                        <h3 class="text-base font-normal text-gray-500">Users</h3>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">--}}
+{{--                                <div class="flex items-center">--}}
+{{--                                    <div class="flex-shrink-0">--}}
+{{--                                        <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">--}}
+{{--                                            {{ $users }}--}}
+{{--                                        </span>--}}
+{{--                                        <h3 class="text-base font-normal text-gray-500">Users</h3>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                         <div class="grid grid-cols-1 2xl:grid-cols-2 xl:gap-4 my-4">
                             <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">

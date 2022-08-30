@@ -89,7 +89,7 @@
 
                 <div class="w-full shadow bg-white ">
                     <div class="w-full rounded-xl border">
-                        @if (auth('user')->check())
+                        @if (auth('user')->check() || auth('admin')->check())
                             <div class="w-full m-2 p-2">
                                 <form action="{{ route('comment.store') }}" method="post" class="w-full p-4">
                                     @csrf
@@ -122,7 +122,7 @@
                             </div>
                         @endif
 
-                        @if (auth('user')->check())
+                        @if (auth('user')->check() || auth('admin')->check())
                             @if ($complain->comments->count() > 0)
                                 @foreach ($complain->comments as $comment)
                                     <div class="rounded-xl border p-5 mb-5  bg-white">
@@ -156,7 +156,7 @@
                                             <div class="text-sm text-neutral-600">{{ $comment->body }}</div>
                                         </div>
 
-                                        @if ($comment->user->id == Auth::user()->id)
+                                        @if (auth('user')->check() && $comment->user->id == Auth::user()->id)
                                             <div class="flex justify-end">
                                                 <div class="flex items-center space-x-2">
 
@@ -204,21 +204,21 @@
 
 
         <!-- Sidebar Section -->
-        <aside class="w-full md:w-1/3 flex flex-col items-center px-3">
+{{--        <aside class="w-full md:w-1/3 flex flex-col items-center px-3">--}}
 
-            <div class="w-full bg-white shadow flex flex-col my-4 p-6">
-                <p class="text-xl font-semibold pb-5">About Us</p>
-                <p class="pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis est eu odio
-                    sagittis tristique. Vestibulum ut finibus leo. In hac habitasse platea dictumst.</p>
-                <a href="#"
-                    class="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4">
-                    Get to know us
-                </a>
-            </div>
+{{--            <div class="w-full bg-white shadow flex flex-col my-4 p-6">--}}
+{{--                <p class="text-xl font-semibold pb-5">About Us</p>--}}
+{{--                <p class="pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis est eu odio--}}
+{{--                    sagittis tristique. Vestibulum ut finibus leo. In hac habitasse platea dictumst.</p>--}}
+{{--                <a href="#"--}}
+{{--                    class="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4">--}}
+{{--                    Get to know us--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
 
 
-        </aside>
+{{--        </aside>--}}
 
     </div>
 

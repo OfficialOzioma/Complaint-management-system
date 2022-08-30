@@ -44,34 +44,17 @@
 
                         <div class="relative z-0 w-full mb-6 group">
 
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Email address
+                            <label for="reg_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                School registration Number
                             </label>
-                            <input type="email" id="email" name="email"
+                            <input type="text" id="reg_no" name="reg_no"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Enter email" value="{{ old('email') }}" required>
+                                placeholder="Enter your school registration Number" value="{{ old('reg_no') }}" required>
 
-                            @if ($errors->has('email'))
+                            @if ($errors->has('reg_no'))
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Error!</span>
-                                    {{ $errors->first('email') }}
-                                </p>
-                            @endif
-                        </div>
-
-                        {{-- Phone input --}}
-                        <div class="relative z-0 w-full mb-6 group">
-
-                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Enter your phone number</label>
-                            <input type="text" id="phone" name="phone"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Enter phone number" value="{{ old('phone') }}" required>
-
-                            @if ($errors->has('phone'))
-                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
-                                        class="font-medium">Error!</span>
-                                    {{ $errors->first('phone') }}
+                                    {{ $errors->first('reg_no') }}
                                 </p>
                             @endif
                         </div>

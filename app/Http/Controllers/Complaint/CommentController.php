@@ -46,7 +46,7 @@ class CommentController extends Controller
         ]);
         // dd(auth('admin')->check());
         $comment = new Comment();
-        $comment->user_id = auth()->user()->id;
+        $comment->user_id = auth()->user()->id ?? auth('admin')->user()->id;
         $comment->user_type = auth('admin')->check() ? 'admin' : 'user';
         $comment->complaint_id = $request->complain_id;
         $comment->body = $request->comment;
@@ -56,7 +56,7 @@ class CommentController extends Controller
             Activity::create([
                 'description' => 'You commented a complaint',
                 'type' => 'comment',
-                'user_id' => auth()->user()->id,
+                'user_id' =>  auth()->user()->id ?? auth('admin')->user()->id,
                 'complaint_id' => $request->complain_id,
                 'comment_id' => $comment->id,
             ]);

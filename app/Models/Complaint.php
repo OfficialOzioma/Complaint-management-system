@@ -15,6 +15,7 @@ class Complaint extends Model
         'title',
         'resolved',
         'description',
+        'unique_id'
     ];
 
     public function user()

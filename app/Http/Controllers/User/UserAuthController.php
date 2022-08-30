@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,14 +23,18 @@ class UserAuthController extends Controller
         return view('user.login');
     }
 
-    public function userAuthenticate(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function userAuthenticate(Request $request): RedirectResponse
     {
         $request->validate([
-            'email' => 'required|email',
+            'reg_no' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('reg_no', 'password');
         if (auth('user')->attempt($credentials)) {
             return redirect()->route('dashboard');
         }
@@ -34,24 +42,29 @@ class UserAuthController extends Controller
         return redirect()->back()->with('error', 'These credentials do not match our records!');
     }
 
-    public function register()
+    /**
+     * @return Application|Factory|View
+     */
+    public function register(): View|Factory|Application
     {
         return view('user.register');
     }
 
-    public function signup(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function signup(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'phone' => 'required|numeric',
+            'reg_no' => 'required|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
 
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
+            'reg_no' => $request->reg_no,
             'password' => bcrypt($request->password),
         ]);
 

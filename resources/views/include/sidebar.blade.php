@@ -75,11 +75,6 @@
                     </li>
                 </ul>
                 <div class="space-y-2 pt-2">
-                    <a href="#"
-                        class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
-                        <span> <i class="fas fa-gear"></i> </span>
-                        <span class="ml-4">Settings</span>
-                    </a>
                     <a href="{{ Route('admin.logout') }}" target="_blank"
                         class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
                         <span> <i class="fas fa-lock-open"></i> </span>
