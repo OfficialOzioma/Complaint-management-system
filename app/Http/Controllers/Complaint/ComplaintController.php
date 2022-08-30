@@ -34,14 +34,13 @@ class ComplaintController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        if(auth()->check()){
+        if(auth('user')->check()){
             $complains = Complaint::where('user_id', auth()->user()->id)->with('comments')->get();
             $issues = Issue::get();
-        }else{
+        }else if(auth('admin')->check()){
             $complains = Complaint::with('comments')->get();
             $issues = Issue::get();
         }
-
 
         return view('complaint.index', compact('complains', 'issues'));
     }
