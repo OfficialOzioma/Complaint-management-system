@@ -65,7 +65,7 @@
                         <!-- Nome -->
                         <div class="text-md font-medium ">{{ auth()->user()->name }}</div>
                         <!-- Título -->
-                        <div class="text-sm font-regular">User</div>
+                        <div class="text-sm font-regular">{{ auth()->user()->reg_no }}</div>
                     </div>
 
                     <!-- Foto -->
@@ -443,3 +443,11 @@
 
     </div>
 @endsection
+
+
+{{--
+git branch -m main master
+git fetch origin
+git branch -u origin/master master
+git remote set-head origin -a
+--}}

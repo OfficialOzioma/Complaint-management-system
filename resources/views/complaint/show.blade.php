@@ -44,7 +44,7 @@
                 </article>
                 @if ($complain->resolved == false)
                     @if (auth()->check())
-                        @if ($complain->user_id == Auth::user('user')->id)
+                        @if ($complain->user_id == auth()->user('user')->id)
                             <div class="flex flex-col items-center justify-center m-2">
                                 <div class="inline-flex rounded-md shadow-sm" role="group">
                                     <button type="button"
