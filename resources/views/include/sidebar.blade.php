@@ -39,7 +39,7 @@
                         <a href="{{ route('complaint.index') }}" target="_blank"
                             class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                             <span> <i class="fa-solid  fa-clipboard-check"></i></span>
-                            <span class="ml-3 flex-1 whitespace-nowrap">Complains</span>
+                            <span class="ml-3 flex-1 whitespace-nowrap">Complaints</span>
                             <span
                                 class="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">
                                 {{ $complains }}

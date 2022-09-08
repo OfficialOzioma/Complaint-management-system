@@ -34,15 +34,21 @@ class ComplaintController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        if(auth('user')->check()){
+        if (auth('user')->check()) {
             $complains = Complaint::where('user_id', auth()->user()->id)->with('comments')->get();
             $issues = Issue::get();
-        }else if(auth('admin')->check()){
+        } else if (auth('admin')->check()) {
             $complains = Complaint::with('comments')->get();
             $issues = Issue::get();
         }
 
         return view('complaint.index', compact('complains', 'issues'));
+    }
+
+    public function predefined()
+    {
+        $issues = Issue::get();
+        return view('complaint.predefined', compact('issues'));
     }
 
     /**
@@ -91,7 +97,7 @@ class ComplaintController extends Controller
                 'comment_id' => null,
             ]);
 
-            return redirect()->route('complaint.index')->with(['success' => 'Sucessfully, Your complaint has been submitted.']);
+            return redirect()->route('complaint.index')->with(['success' => 'Your complaint has been submitted.']);
         }
 
         return redirect()->back()->with(['error' => 'Something went wrong, Please try again.']);
@@ -116,11 +122,12 @@ class ComplaintController extends Controller
      * @param  \App\Models\Complaint  $complaint
      * @return \Illuminate\Http\Response
      */
-    public function edit(Complaint $complaint)
+    public function edit(Complaint $complaint, $id)
     {
-        $complain = $complaint->find($complaint->id);
-
-        return view('complaint.edit', compact('complain'));
+        $complain = $complaint->find($id);
+        // dd($complain);
+        $categories = Category::get();
+        return view('complaint.edit', compact('complain', 'categories'));
     }
 
     /**
@@ -134,12 +141,15 @@ class ComplaintController extends Controller
     {
         $request->validate([
             'title' => 'required',
+            'category' => 'required',
             'description' => 'required',
         ]);
 
-        $complaint->title = $request->title;
-        $complaint->description = $request->description;
-        $complaint->save();
+        $complain = $complaint->find($request->id);
+        $complain->title = $request->title;
+        $complain->categories_id = $request->category;
+        $complain->description = $request->description;
+        $complain->save();
 
         return redirect()->route('complaint.index')->with(['message' => 'Sucessfully, Complaint updated.']);
     }
@@ -169,7 +179,9 @@ class ComplaintController extends Controller
 
     public function getresolved(Request $request)
     {
-        $complains = Complaint::where('resolved', true)->get();
+        $complains = Complaint::where('resolved', true)
+            ->where('user_id', auth()->user()->id)
+            ->get();
 
         return view('complaint.index', compact('complains'));
     }
@@ -183,7 +195,9 @@ class ComplaintController extends Controller
 
     public function getunresolved(Request $request)
     {
-        $complains = Complaint::where('resolved', false)->get();
+        $complains = Complaint::where('resolved', false)
+            ->where('user_id', auth()->user()->id)
+            ->get();
 
         return view('complaint.index', compact('complains'));
     }

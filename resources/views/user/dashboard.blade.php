@@ -23,10 +23,10 @@
             </a>
 
             <!-- Profile -->
-{{--            <div--}}
-{{--                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">--}}
-{{--                <span><i class="fa-solid fa-user-large text-3xl"></i></span>--}}
-{{--            </div>--}}
+            {{-- <div --}}
+            {{-- class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white"> --}}
+            {{-- <span><i class="fa-solid fa-user-large text-3xl"></i></span> --}}
+            {{-- </div> --}}
 
             <!-- Complains -->
             <a href="{{ route('complaint.index') }}">
@@ -65,7 +65,10 @@
                         <!-- Nome -->
                         <div class="text-md font-medium ">{{ auth()->user()->name }}</div>
                         <!-- Título -->
-                        <div class="text-sm font-regular">{{ auth()->user()->reg_no }}</div>
+                        <div class="text-sm font-regular">{{ auth()->user()->reg_no }} </div>
+
+                        <div class="text-sm font-regular">{{ $user->setting->dept ?? '' }} </div>
+
                     </div>
 
                     <!-- Foto -->
@@ -87,8 +90,8 @@
                             <div class="flex items-center mt-2.5 mb-5 ml-12">
 
                                 <a href="{{ route('complaint.create') }}"
-                                    class="text-white text-lg font-medium hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300  rounded-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                    <h2> Add new complain</h2>
+                                    class="text-white  bg-green-800 text-lg font-medium hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300  rounded-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                    <h2> Add new Complaint</h2>
                                 </a>
 
                             </div>
@@ -102,8 +105,8 @@
                             <div class="flex items-center mt-2.5 mb-5 ml-12">
 
                                 <a href="{{ route('complaint.resolved') }}"
-                                    class="text-white hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900">
-                                    <h2>View Resolved Complains</h2>
+                                    class="text-white  bg-red-800 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900">
+                                    <h2>View Resolved Complaint</h2>
                                 </a>
 
                             </div>
@@ -118,8 +121,8 @@
                             <div class="flex items-center mt-2.5 mb-5 ml-12">
 
                                 <a href="{{ route('complaint.unresolved') }}"
-                                    class="text-white hover:text-white border border-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-500 dark:text-yellow-500 dark:hover:text-white dark:hover:bg-yellow-600 dark:focus:ring-yellow-900">
-                                    <h2> View Unresolve Complain</h2>
+                                    class="text-white  bg-gray-800 hover:text-white border border-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-yellow-500 dark:text-yellow-500 dark:hover:text-white dark:hover:bg-yellow-600 dark:focus:ring-yellow-900">
+                                    <h2> View Unresolve Complaint</h2>
                                 </a>
 
                             </div>
@@ -132,9 +135,9 @@
                             </div>
                             <div class="flex items-center mt-2.5 mb-5 ml-12">
 
-                                <a href="#"
-                                    class="text-white hover:text-white border border-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-500 dark:text-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-900">
-                                    <h2> View Predefined complain</h2>
+                                <a href="{{ route('predefined-complaint') }}"
+                                    class="text-white  bg-yellow-800 hover:text-white border border-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-500 dark:text-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-900">
+                                    <h2> View Predefined Complaint</h2>
                                 </a>
 
                             </div>
@@ -215,7 +218,7 @@
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td class="px-6 py-4 text-center" colspan="5">
                                                 <span class="text-center text-2xl text-gray-600 dark:text-gray-400">
-                                                    No Complains Found</span>
+                                                    No Complaints Found</span>
                                             </td>
                                         </tr>
                                     @endif
@@ -234,7 +237,7 @@
                         <span class="text-center text-3xl m-1 font-bold text-white dark:text-white">
                             <h3>
                                 <i class="fa-solid  fa-clipboard-check text-1xl ml-32  text-white"></i>
-                                Resolved Complains
+                                Resolved Complaints
                             </h3>
                         </span>
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -321,7 +324,7 @@
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td class="px-6 py-4 text-center" colspan="5">
                                                 <span class="text-center text-2xl text-gray-600 dark:text-gray-400">
-                                                    No Complains Found</span>
+                                                    No Complaints Found</span>
                                             </td>
                                         </tr>
                                     @endif
@@ -337,7 +340,7 @@
                         <span class="text-center text-3xl m-1 font-bold text-white dark:text-white">
                             <h3>
                                 <i class="fa-solid fas fa-clipboard-question text-1xl ml-32  text-white"></i>
-                                Unresolved Complains
+                                Unresolved Complaints
                             </h3>
                         </span>
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -425,7 +428,7 @@
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td class="px-6 py-4 text-center" colspan="5">
                                                 <span class="text-center text-2xl text-gray-600 dark:text-gray-400">
-                                                    No Complains Found</span>
+                                                    No Complaints Found</span>
                                             </td>
                                         </tr>
                                     @endif
@@ -445,9 +448,7 @@
 @endsection
 
 
-{{--
-git branch -m main master
+{{-- git branch -m main master
 git fetch origin
 git branch -u origin/master master
-git remote set-head origin -a
---}}
+git remote set-head origin -a --}}

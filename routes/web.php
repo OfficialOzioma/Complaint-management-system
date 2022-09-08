@@ -38,6 +38,8 @@ Route::get('/complaint/resolved', [ComplaintController::class, 'getresolved'])->
 Route::get('/complaint/unresolved', [ComplaintController::class, 'getunresolved'])->name('complaint.unresolved');
 Route::get('/complaint/show/{id}', [ComplaintController::class, 'show'])->name('complaint.show');
 
+Route::get('/predefined-complaint', [ComplaintController::class, 'predefined'])->name('predefined-complaint');
+
 Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
 
 /*------------------------------------------

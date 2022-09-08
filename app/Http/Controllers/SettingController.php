@@ -16,22 +16,22 @@ class SettingController extends Controller
     {
         $settings = Setting::where('user_id', auth()->user()->id)->first();
 
-        return view('user.setting',compact('settings'));
+        return view('user.setting', compact('settings'));
     }
 
     public function store(Request $request)
     {
         $getSetting = Setting::where('user_id', auth()->user()->id)->first();
 
-        if($getSetting){
+        if ($getSetting) {
             $this->setting =  $getSetting->update(
                 [
-                'email' => $request->email,
-                'dept' => $request->dept,
-                'level' => $request->level
+                    'email' => $request->email,
+                    'dept' => $request->dept,
+                    'level' => $request->level
                 ]
             );
-        }else{
+        } else {
 
             $request->validate([
                 'email' => 'required|email|unique:settings',
@@ -49,8 +49,8 @@ class SettingController extends Controller
 
 
 
-        if($this->setting){
-            return redirect()->route('user.setting')->with(['success' => 'Successfully, Your Settings has been saved.']);
+        if ($this->setting) {
+            return redirect()->route('user.setting')->with(['success' => 'Your Settings was saved successfully.']);
         }
 
         return redirect()->back()->with(['error' => 'Something went wrong, Please try again.']);

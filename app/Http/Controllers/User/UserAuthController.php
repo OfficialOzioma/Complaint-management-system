@@ -69,7 +69,8 @@ class UserAuthController extends Controller
         ]);
 
         if ($user) {
-            return redirect()->route('login')->with(['info' => 'Sucessfully, Please you now login.']);
+            return $this->userAuthenticate($request);
+            // return redirect()->route('login')->with(['info' => 'Sucessfully, Please you now login.']);
         }
 
         return redirect()->route('login')->with(['error' => 'Something went wrong, Please try again.']);
